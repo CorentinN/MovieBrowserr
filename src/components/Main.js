@@ -1,21 +1,28 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class Main extends React.Component {
+
+    handleSubmitId(id,e){
+        this.props.handleSubmitId(id);
+    }
     render() { 
         return ( 
             <div className="main">
-                {this.props.title.map(title => 
-                    <div className="film-wrapper" key={title.title}>
+                {this.props.title.map(title =>
+                    <Link to={"/film/"+ 21861}
+                     className="film-wrapper"
+                      key={title.title}
+                      onClick={this.handleSubmitId.bind(this, title.id)}
+                      >
                         <img alt={title.title}className="" src={"https://image.tmdb.org/t/p/w500" + title.backdrop_path} />
-                        <div className="film__text">
-                            <h2 className="film__title">{title.title}</h2>
-                            <p>{title.overview}</p>
-                        </div>
-                    </div>
+                    </Link>
                 )}
-                <div className="pagination">
-                    <div>  Previous page</div>
-                    <div>  Next page</div>
+                <div 
+                className="btn-load-more"
+                onClick={this.handleReload.bind(this)}
+                >
+                    
                 </div>
             </div>
          )

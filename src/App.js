@@ -14,7 +14,8 @@ class App extends Component {
         this.state = { 
             title: [],
             film:[],
-            error: 'error'
+            error: 'error',
+            page:1
         };
     }
 
@@ -24,10 +25,9 @@ class App extends Component {
         let rest = str.substring(0, str.lastIndexOf("/") + 1);
         let last = str.substring(str.lastIndexOf("/") + 1, str.length);
         if(rest === "/film/"){
-            console.log('yespapy')
             this.getMovie(parseInt(last,10));
-        }else{
-            axios.get('https://api.themoviedb.org/3/discover/movie?api_key=b265a169ff1b9a5a938891de07d65b29&language=fr-FR&sort_by=popularity.desc&include_adult=false&include_video=true&page=7')
+        } else {
+            axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=b265a169ff1b9a5a938891de07d65b29&language=fr-FR&sort_by=popularity.desc&include_adult=false&include_video=true&page=${this.state.page}`)
             .then( response => {
                 let title = response.data.results;
                 this.setState({title :title});
@@ -64,7 +64,10 @@ class App extends Component {
                     <SearchBar handleSubmitId={this.handleSubmitId.bind(this)} />
                     <Switch>
                         <Route exact path="/">
-                            <Main title={this.state.title}/>
+                            <Main 
+                            title={this.state.title}
+                            handleSubmitId={this.handleSubmitId.bind(this)}
+                            />
                         </Route>
                         <Route exact path="/:id>">
                             <Main title={this.state.title}/>
