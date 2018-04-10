@@ -12,13 +12,15 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            title: [],
             film:[],
+            title: [],
             error: 'error',
             page:1
         };
     }
-
+    // handleReload(){
+    //     this.setState
+    // }
     componentDidMount(){
         // check the url if we are looking for a specific film
         let str = document.location.pathname;
@@ -27,14 +29,28 @@ class App extends Component {
         if(rest === "/film/"){
             this.getMovie(parseInt(last,10));
         } else {
-            axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=b265a169ff1b9a5a938891de07d65b29&language=fr-FR&sort_by=popularity.desc&include_adult=false&include_video=true&page=${this.state.page}`)
+            // this.page = 12;
+            console.log('HELLO',this.state.page)
+            this.getMoviePage();
+        }
+    }
+    
+    getMoviePage(){
+        axios.get('https://api.themoviedb.org/3/movie/popular?api_key=b265a169ff1b9a5a938891de07d65b29&language=en-UK&page='+ this.state.page)
             .then( response => {
+                console.log('test',this.state.page)
                 let title = response.data.results;
-                this.setState({title :title});
+                this.setState({
+                   title: [...this.state.title, ...title],
+                   page : this.state.page + 1
+                });
             }).catch((error) =>{
                 this.setState({error:error})
             })
-        }
+    }
+
+    loadMore(){
+        this.getMoviePage();
     }
 
     getMovie(id){
@@ -66,7 +82,9 @@ class App extends Component {
                         <Route exact path="/">
                             <Main 
                             title={this.state.title}
+                            // page={this.state.page}
                             handleSubmitId={this.handleSubmitId.bind(this)}
+                            loadMore={this.loadMore.bind(this)}
                             />
                         </Route>
                         <Route exact path="/:id>">
