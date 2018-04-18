@@ -1,4 +1,6 @@
-.active > a{
-    background-color: red;
-    color:#fff;
-}
+ul {
+  list-style: none; }
+
+.active {
+  background-color: red;
+  color: #fff; }
