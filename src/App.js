@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import axios from 'axios'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import './styles/Normalize.css';
 import './styles/App.css';
 
 //components
@@ -61,12 +62,14 @@ class App extends Component {
         .then( response => {
             this.movie = response.data;
             this.setState({film:response.data})
-            // Not optimal but  the project need to move forward time 
+            // Tried to make it work with < Redirect /> but didn't manage to yet
             //*TO REFACTOR*
             let str = document.location.pathname;
             let rest = str.substring(0, str.lastIndexOf("/") + 1);
-            if(rest !=   "/film/"){
+            if(rest !==  "/film/"){
                 window.location = '/film/' + response.data.id;
+            }else{
+                window.history.pushState("", "", "/film/"+id)
             }
         }).catch((error) =>{
             this.setState({error:error})
@@ -75,7 +78,7 @@ class App extends Component {
 
 
     handleSubmitId(id){
-        //window.history.pushState("", "", "/film/"+id)
+        
         // this.props.history.push('/movie'); 
         console.log('history',this.props.match)
         console.log('aye')
@@ -93,7 +96,7 @@ class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div>
+                <div className="app-container">
                     <SearchBar 
                         handleSubmitId={this.handleSubmitId.bind(this)}
                         setRedirect={this.setRedirect.bind(this)}

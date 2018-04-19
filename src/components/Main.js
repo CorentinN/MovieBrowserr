@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import '../styles/Normalize.css';
+
 let pagination = undefined;
 class Main extends React.Component {
     // handleReloader(){

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 // import { Redirect, Switch } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/Normalize.css';
 import '../styles/search.css';
+
 
 class SearchBar extends Component {
     constructor(props) {
@@ -73,11 +75,14 @@ class SearchBar extends Component {
     render() { 
         const { cursor } = this.state;
         return ( 
-            <div className="inputWrapper">
+            <div className="header">
+                <h1>Movie Browser</h1>
+                <span>powered by</span>
+                <img src={tmdblogo} alt ="Logo de The movie Database"/>
                 <form onSubmit={this.handleSubmit.bind(this)} onKeyDown={this.handleKeyDown.bind(this)}>
-                    <input autoComplete="off" type="text" id="searchForm" onChange={this.handleSearch.bind(this)}/>
+                    <input className ="search-bar" autoComplete="off" type="text" id="searchForm" onChange={this.handleSearch.bind(this)}/>
                 </form>
-                {this.state.search !== [] && 
+                {this.state.search.length !== 0 && 
                     <div className="searchWrapper">
                         <ul>
                             {this.state.search.map((results,index) => {
