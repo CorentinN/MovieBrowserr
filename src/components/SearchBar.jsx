@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-// import { Redirect, Switch } from 'react-router-dom';
+import { Link } from'react-router-dom';
 import axios from 'axios';
 import '../styles/Normalize.css';
-import '../styles/search.css';
-
-
+import '../styles/base/settings.scss';
 class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = { 
             search:[],
             cursor:0,
-            redirect:false
+            isHovered:false
         };
     }
 
@@ -26,11 +24,10 @@ class SearchBar extends Component {
                 cursor : prevState.cursor + 1
             }))
         } else if (e.key === 'Enter'){
-            if(e.target.value !== ''){
+            if(e.target.value !== '' || this.state.search.length !== 0 ){
                 // let activeEl = document.getElementsByClassName('active > a[href]')[0];
                 let activeEl = document.querySelectorAll('.active a')[0];
                 let activeid = activeEl.getAttribute('dataid')
-                this.handleredirect();
                 this.handleSubmitId(activeid,e);
             }
             // this.setState({
@@ -39,9 +36,6 @@ class SearchBar extends Component {
         }
     }
 
-    handleredirect(){
-        this.props.setRedirect()
-    }
 
     handleSubmit(e){
         e.preventDefault();
@@ -53,8 +47,9 @@ class SearchBar extends Component {
         document.getElementById('searchForm').value = '';
         this.setState({search:[]})//refresh the search state to make the search resulst disapear on click
         this.setState({cursor:0});//reset cursor to top after selection
-        // this.setState({redirectlink:""});
-        // this.setState({redirect:false});
+    }
+    handleGohome(){
+        this.props.loadMore();
     }
 
     handleSearch(e){
@@ -67,27 +62,74 @@ class SearchBar extends Component {
         .then((response) => {
             let search = response.data.results;
             this.setState({search: search})
+            this.setState({cursor: 0});
         }).catch((error)=>{
             console.log(error)
         })
     }
+    hoverOn(){
+        this.setState({isHovered: true})
+    }
+    hoverOff(){
+        this.setState({isHovered: false})
+    }
+    
+    // handleMouseOver(e){
+    //     let elem = e.target
+    //     // elem = String(elem);
+    //     // let elemHovered = document.querySelector(`a[dataid= ${elem}]`);
+    //     // console.log(elemHovered)
+    //     // elem.toggle('active')
+    //     elem.classList.toggle("active");
+    // }
+    onHoverCursor(index){
+        this.setState({cursor: index})
+    }
 
+    
     render() { 
         const { cursor } = this.state;
         return ( 
             <div className="header">
-                <h1>Movie Browser</h1>
-                <span>powered by</span>
-                <img src={tmdblogo} alt ="Logo de The movie Database"/>
-                <form onSubmit={this.handleSubmit.bind(this)} onKeyDown={this.handleKeyDown.bind(this)}>
-                    <input className ="search-bar" autoComplete="off" type="text" id="searchForm" onChange={this.handleSearch.bind(this)}/>
-                </form>
+                <div className="header__bar">
+                    <div className="title-wrapper">
+                        <Link to="/" href="/"
+                        onClick={this.handleGohome.bind(this)}
+                        >
+                            <i className="fa fa-film"></i>
+                            <h1 className="title-header">movieBrowser</h1>
+                        </Link>
+                    </div>
+                    <form 
+                    className="form-search" 
+                    onSubmit={this.handleSubmit.bind(this)} 
+                    onKeyDown={this.handleKeyDown.bind(this)}>
+                        <i className="fa fa-search"></i>
+                        <input 
+                            className="search-bar"
+                            id="searchForm"
+                            autoComplete="off" 
+                            placeholder="Search for any movie"
+                            type="text"  
+                            onChange={this.handleSearch.bind(this)}
+                        />
+                    </form>
+                </div>
+
                 {this.state.search.length !== 0 && 
                     <div className="searchWrapper">
                         <ul>
-                            {this.state.search.map((results,index) => {
+                            {this.state.search.map((results,index) => { 
                                 return (
-                                    <li key={index-1} className={`${cursor === index ? 'active' : ''}`}>
+                                    <li  
+                                        key={index-1}
+                                        className={`${cursor === index ? 'search-film active' : 'search-film'}`}
+                                        // className={ this.state.isHovered  ? 'search-film active' : 'search-film'}
+                                        // onMouseEnter={this.hoverOn.bind(this)} 
+                                        // onMouseLeave={this.hoverOff.bind(this)}
+                                        // onMouseOver={this.handleMouseOver.bind(this)}
+                                        onMouseEnter={this.onHoverCursor.bind(this, index)}
+                                    >
                                         <a
                                             key={index -1}
                                             href={results.title}

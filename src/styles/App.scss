@@ -1,23 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Istok+Web:400,700|Montserrat:400,600');
-*,*:before,*:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-}
-
-
-html ,body{
-  height:100vh;
-  margin:0;
-  font-family: 'Istok Web', 'Sans-serif'
-}
-
-body{
-  background-color: #fff;
-}
-h2 {
-  font-family:'Montserrat', 'Sans-serif'
-}
-.app-container {
-  height:100%;
-}
+@import './base/settings.scss';
+@import './base/base.scss';
+@import './components/index.scss';
+@import './components/movie.scss';
+@import './components/search.scss';
+@import './components/main.scss';
