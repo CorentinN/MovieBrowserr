@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
 import '../node_modules/font-awesome/css/font-awesome.min.css';
-import './styles/Normalize.css';
+import 'normalize.css'; 
 import './styles/App.css';
 
 //components
@@ -112,7 +112,7 @@ class App extends Component {
                             <Movie film={this.state.film}/>
                         </Route>
                     </Switch>    
-                {/*<Footer />*/}
+                <Footer />
                 </div>
             </BrowserRouter>
         );

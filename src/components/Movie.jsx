@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/Normalize.css';
 import ModalVideo from 'react-modal-video';
 
 // {film.genres.map((genre) => {
@@ -45,19 +44,24 @@ class Movie extends React.Component {
             <div className="movie__wrap">
                 <div className="movie">    
                    { isMobile ?   
-                        <img 
+                            film.backdrop_path !== null &&
+                            <img 
+                                alt={film.title} 
+                                className="movie__img"
+                                src=
+                                {film.poster_path !== null || undefined ? "https://image.tmdb.org/t/p/w780" + film.backdrop_path : "http://www.rsoilfield.com/wp-content/uploads/image-unavailable.jpg"} 
+                            />
+                    :
+                    
+                        film.poster_path !== null &&
+                            <img 
                             alt={film.title} 
                             className="movie__img"
                             src=
-                            {film.poster_path !== null || undefined ? "https://image.tmdb.org/t/p/w780" + film.backdrop_path : "http://www.rsoilfield.com/wp-content/uploads/image-unavailable.jpg"} 
-                        />
-                    :
-                    <img 
-                        alt={film.title} 
-                        className="movie__img"
-                        src=
-                        {film.poster_path !== null || undefined ? "https://image.tmdb.org/t/p/w500" + film.poster_path : "http://www.rsoilfield.com/wp-content/uploads/image-unavailable.jpg"} 
-                        />
+                            {film.poster_path !== null || undefined ? "https://image.tmdb.org/t/p/w500" + film.poster_path : "http://www.rsoilfield.com/wp-content/uploads/image-unavailable.jpg"} 
+                            />
+                        
+                   
                     }
                     <div className="info__wrap">
                         {<h2 className ="movie__title">{film.title}</h2>}

@@ -2,11 +2,13 @@
 @import 'node_modules/react-modal-video/scss/modal-video.scss';
 
 .movie__wrap {
-    padding-top:9rem;
+    padding-top:13rem;
+    min-height: calc(100vh - 100px);
 }
- 
+
 .movie {
     max-width:960px;
+    
     margin:0  auto;
     padding:20px;
     display:flex;
@@ -33,6 +35,8 @@
     font-weight:600;
     font-family:'Montserrat';
     color:$dark-blue;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .movie__overview {
@@ -52,12 +56,15 @@
     display:flex;
     flex-wrap:wrap;
     align-items: center;
-    margin:20px 0;
+    margin:20px 0 15px 0;
+    font-family:'Isotek Web';
+    
 }
 .movie__genres__wrapper {
     list-style:none;
     display:flex;
     margin-bottom:0;
+    font-family:'Montserrat';
     margin:10px 0 10px 20px ;
     font-weight:600;
     color:$off-black;
@@ -65,6 +72,7 @@
 .movie__average {
     display: inline-block;
     border:3px $purpleLighten solid;
+    font-family:'Montserrat';
     text-align:center;
     height:45px;
     width:45px;
@@ -75,7 +83,7 @@
     color: $off-black;
 }
 .movie__released {
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 .btn__trailer {
     display:inline-block;
@@ -110,7 +118,9 @@
     font-size:1.7rem;
     font-family: 'Montserrat';
     margin-right:10px;
+    font-weight:600;
 }
+
 
 @media (max-width:940px) and (min-width:710px) {
     .movie__title{
@@ -130,6 +140,7 @@
     }
 }
 
+
 @media (max-width:710px) {
     
     .movie{
@@ -142,4 +153,13 @@
         margin-left:20px
     }
     
+}
+
+@media (max-width:450px) {
+    .movie__genres__wrapper{
+        margin-left:0;
+    }
+    .genre__average__wrapper{
+        margin-bottom: 1rem;
+    }
 }

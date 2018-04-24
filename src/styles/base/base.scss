@@ -5,12 +5,12 @@
     padding: 0;
     box-sizing: border-box; 
 }
-html ,body{
+html ,body, #root, .app-container{
     height:100vh;
     margin:0;
    
   }
-  
+
 html {
     font-size:62.5%;
 }

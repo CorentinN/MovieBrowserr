@@ -90,6 +90,55 @@
     background-color: $purple;
     color:#fff;
 }
+.wait-pls {
+    font-size:2rem;
+    margin-top:25px;
+    font-family:'Montserrat';
+}
+// animation loader 
+$cubeSize: 5em;
+.loader-wrapper{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    width:100%;
+}
+.loader{
+    width: $cubeSize;
+    height: $cubeSize;
+    animation: loaderAnim .75s infinite ease-in-out;
+    outline: 1px solid transparent;
+    .bigBox{
+        height: $cubeSize;
+        width: $cubeSize;
+        background-color: $purple;
+        outline: 1px solid transparent;
+        position: fixed;
+    }
+    .smallBox{
+        height: $cubeSize;
+        width: $cubeSize;
+        background-color: #fff;
+        position: fixed;
+        z-index: 1;
+        outline: 1px solid transparent;
+        animation: smallBoxAnim .75s alternate infinite ease-in-out;
+
+    }
+}
+
+@keyframes smallBoxAnim {
+    0% {transform: scale(0.4);}
+    100% {transform: scale(0.75);}
+  }
+  
+@keyframes loaderAnim {
+0% {transform: rotate(0deg);}
+100% {transform: rotate(90deg);}
+}
+
 
 @media (max-width:1250px) {
     .main-movies{

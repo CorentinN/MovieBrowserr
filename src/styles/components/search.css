@@ -92,18 +92,36 @@
   line-height: 4.5;
   cursor: pointer; }
 
+.search-film a:active {
+  background-color: #8357c5;
+  color: #464b5e; }
+
 .active {
   background-color: #8357c5;
   color: #464b5e; }
 
 @media (max-width: 450px) {
   .header {
-    height: 12rem; }
+    height: 12rem;
+    padding: 0; }
   .header__bar {
     flex-direction: column; }
   .form-search {
     height: 50%;
-    width: 100%; }
+    width: 100%;
+    padding: 0 4rem; }
   .title-wrapper {
     margin: 0 auto;
-    height: 50%; } }
+    height: 50%;
+    position: relative; }
+  .title-wrapper a:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(87, 86, 88, 0.205); }
+  .searchWrapper {
+    top: 12rem; } }

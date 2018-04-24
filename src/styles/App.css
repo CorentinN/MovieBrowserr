@@ -4,7 +4,7 @@
   padding: 0;
   box-sizing: border-box; }
 
-html, body {
+html, body, #root, .app-container {
   height: 100vh;
   margin: 0; }
 
@@ -138,7 +138,8 @@ body {
     margin-top: -6px; }
 
 .movie__wrap {
-  padding-top: 9rem; }
+  padding-top: 13rem;
+  min-height: calc(100vh - 100px); }
 
 .movie {
   max-width: 960px;
@@ -165,7 +166,9 @@ body {
   margin-bottom: 14px;
   font-weight: 600;
   font-family: 'Montserrat';
-  color: #333745; }
+  color: #333745;
+  overflow-wrap: break-word;
+  word-wrap: break-word; }
 
 .movie__overview {
   line-height: 1.6;
@@ -182,12 +185,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin: 20px 0; }
+  margin: 20px 0 15px 0;
+  font-family: 'Isotek Web'; }
 
 .movie__genres__wrapper {
   list-style: none;
   display: flex;
   margin-bottom: 0;
+  font-family: 'Montserrat';
   margin: 10px 0 10px 20px;
   font-weight: 600;
   color: #20222b; }
@@ -195,6 +200,7 @@ body {
 .movie__average {
   display: inline-block;
   border: 3px #654299 solid;
+  font-family: 'Montserrat';
   text-align: center;
   height: 45px;
   width: 45px;
@@ -205,7 +211,7 @@ body {
   color: #20222b; }
 
 .movie__released {
-  margin-bottom: 10px; }
+  margin-bottom: 15px; }
 
 .btn__trailer {
   display: inline-block;
@@ -236,7 +242,8 @@ body {
 .average__wrapper span:first-child {
   font-size: 1.7rem;
   font-family: 'Montserrat';
-  margin-right: 10px; }
+  margin-right: 10px;
+  font-weight: 600; }
 
 @media (max-width: 940px) and (min-width: 710px) {
   .movie__title {
@@ -257,6 +264,12 @@ body {
     max-width: 100%; }
   .movie__genres__wrapper {
     margin-left: 20px; } }
+
+@media (max-width: 450px) {
+  .movie__genres__wrapper {
+    margin-left: 0; }
+  .genre__average__wrapper {
+    margin-bottom: 1rem; } }
 
 .header {
   position: fixed;
@@ -352,21 +365,39 @@ body {
   line-height: 4.5;
   cursor: pointer; }
 
+.search-film a:active {
+  background-color: #8357c5;
+  color: #464b5e; }
+
 .active {
   background-color: #8357c5;
   color: #464b5e; }
 
 @media (max-width: 450px) {
   .header {
-    height: 12rem; }
+    height: 12rem;
+    padding: 0; }
   .header__bar {
     flex-direction: column; }
   .form-search {
     height: 50%;
-    width: 100%; }
+    width: 100%;
+    padding: 0 4rem; }
   .title-wrapper {
     margin: 0 auto;
-    height: 50%; } }
+    height: 50%;
+    position: relative; }
+  .title-wrapper a:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(87, 86, 88, 0.205); }
+  .searchWrapper {
+    top: 12rem; } }
 
 .movies__wrapper {
   padding-top: 12rem; }
@@ -447,6 +478,51 @@ body {
   background-color: #8357c5;
   color: #fff; }
 
+.wait-pls {
+  font-size: 2rem;
+  margin-top: 25px;
+  font-family: 'Montserrat'; }
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%; }
+
+.loader {
+  width: 5em;
+  height: 5em;
+  animation: loaderAnim .75s infinite ease-in-out;
+  outline: 1px solid transparent; }
+  .loader .bigBox {
+    height: 5em;
+    width: 5em;
+    background-color: #8357c5;
+    outline: 1px solid transparent;
+    position: fixed; }
+  .loader .smallBox {
+    height: 5em;
+    width: 5em;
+    background-color: #fff;
+    position: fixed;
+    z-index: 1;
+    outline: 1px solid transparent;
+    animation: smallBoxAnim .75s alternate infinite ease-in-out; }
+
+@keyframes smallBoxAnim {
+  0% {
+    transform: scale(0.4); }
+  100% {
+    transform: scale(0.75); } }
+
+@keyframes loaderAnim {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(90deg); } }
+
 @media (max-width: 1250px) {
   .main-movies {
     width: 900px; } }
@@ -470,3 +546,41 @@ body {
     width: 300px; }
   .film-wrapper img {
     width: 300px; } }
+
+.footer__wrapper {
+  height: 100px;
+  width: 100vw;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.info__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center; }
+
+.tmdb-logo {
+  height: 50px;
+  color: #8357c5; }
+
+.info__wrapper ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%; }
+
+.info__wrapper ul li {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-right: 25px;
+  height: 100%;
+  line-height: 4.5rem; }
+
+.info__wrapper ul li a {
+  text-decoration: none;
+  color: #8357c5; }
+
+.info__wrapper ul li a:hover {
+  color: #654299; }

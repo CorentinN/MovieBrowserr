@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from'react-router-dom';
 import axios from 'axios';
-import '../styles/Normalize.css';
 import '../styles/base/settings.scss';
 class SearchBar extends Component {
     constructor(props) {
